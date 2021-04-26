@@ -366,92 +366,99 @@ namespace CalculatorWinForms
             // 
             // button29
             // 
+            this.button29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button29.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button29.Location = new System.Drawing.Point(483, 163);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(151, 75);
             this.button29.TabIndex = 23;
             this.button29.Text = "ctg";
-            this.button29.UseVisualStyleBackColor = true;
+            this.button29.UseVisualStyleBackColor = false;
             // 
             // button30
             // 
+            this.button30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button30.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button30.Location = new System.Drawing.Point(326, 163);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(151, 75);
             this.button30.TabIndex = 22;
             this.button30.Text = "tg";
-            this.button30.UseVisualStyleBackColor = true;
+            this.button30.UseVisualStyleBackColor = false;
             // 
             // button31
             // 
+            this.button31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button31.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button31.Location = new System.Drawing.Point(169, 163);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(151, 75);
             this.button31.TabIndex = 21;
             this.button31.Text = "cos";
-            this.button31.UseVisualStyleBackColor = true;
+            this.button31.UseVisualStyleBackColor = false;
             // 
             // button32
             // 
+            this.button32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button32.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button32.Location = new System.Drawing.Point(12, 163);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(151, 75);
             this.button32.TabIndex = 20;
             this.button32.Text = "sin";
-            this.button32.UseVisualStyleBackColor = true;
+            this.button32.UseVisualStyleBackColor = false;
             // 
             // button33
             // 
+            this.button33.BackColor = System.Drawing.Color.White;
             this.button33.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button33.Location = new System.Drawing.Point(483, 82);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(151, 75);
             this.button33.TabIndex = 27;
             this.button33.Text = "π";
-            this.button33.UseVisualStyleBackColor = true;
+            this.button33.UseVisualStyleBackColor = false;
             // 
             // button34
             // 
+            this.button34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button34.Font = new System.Drawing.Font("Unispace", 33.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button34.Location = new System.Drawing.Point(326, 82);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(151, 75);
             this.button34.TabIndex = 26;
             this.button34.Text = "→";
-            this.button34.UseVisualStyleBackColor = true;
+            this.button34.UseVisualStyleBackColor = false;
             // 
             // button35
             // 
+            this.button35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button35.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button35.Location = new System.Drawing.Point(169, 82);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(151, 75);
             this.button35.TabIndex = 25;
             this.button35.Text = "⌫";
-            this.button35.UseVisualStyleBackColor = true;
+            this.button35.UseVisualStyleBackColor = false;
             // 
             // button36
             // 
+            this.button36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button36.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button36.Location = new System.Drawing.Point(12, 82);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(151, 75);
             this.button36.TabIndex = 24;
-            this.button36.Text = "⌫";
-            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Text = "C";
+            this.button36.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Font = new System.Drawing.Font("Unispace", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(622, 70);
             this.label1.TabIndex = 28;
-            this.label1.Text = "label1";
             // 
             // pictureBox1
             // 
