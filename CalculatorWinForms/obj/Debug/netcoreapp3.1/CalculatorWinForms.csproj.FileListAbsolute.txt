@@ -1,0 +1,15 @@
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.exe
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.deps.json
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.runtimeconfig.json
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.runtimeconfig.dev.json
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.dll
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\bin\Debug\netcoreapp3.1\CalculatorWinForms.pdb
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.csprojAssemblyReference.cache
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.Form1.resources
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.csproj.GenerateResource.cache
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.AssemblyInfoInputs.cache
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.AssemblyInfo.cs
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.csproj.CoreCompileInputs.cache
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.dll
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.pdb
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.genruntimeconfig.cache
