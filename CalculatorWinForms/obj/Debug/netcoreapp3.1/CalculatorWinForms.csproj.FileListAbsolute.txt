@@ -13,3 +13,4 @@ D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\
 D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.dll
 D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.pdb
 D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.genruntimeconfig.cache
+D:\My projects C#\CalculatorWinForms\CalculatorWinForms\obj\Debug\netcoreapp3.1\CalculatorWinForms.Properties.Resources.resources
