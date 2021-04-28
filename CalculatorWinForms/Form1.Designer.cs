@@ -67,6 +67,9 @@ namespace CalculatorWinForms
             this.buttonCleanAll = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -495,9 +498,38 @@ namespace CalculatorWinForms
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(640, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(896, 634);
+            this.pictureBox1.Size = new System.Drawing.Size(896, 552);
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(640, 568);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(233, 15);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Введите коофицент растяжения в высоту";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(688, 597);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(126, 23);
+            this.textBox1.TabIndex = 31;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.Red;
+            this.button10.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button10.Location = new System.Drawing.Point(1013, 587);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(151, 37);
+            this.button10.TabIndex = 32;
+            this.button10.Text = "Очистить";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
@@ -505,6 +537,9 @@ namespace CalculatorWinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1548, 654);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonPI);
@@ -539,6 +574,7 @@ namespace CalculatorWinForms
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -585,6 +621,9 @@ namespace CalculatorWinForms
         private System.Windows.Forms.Button s;
         private System.Windows.Forms.Button o;
         private System.Windows.Forms.Button n;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button10;
     }
 }
 

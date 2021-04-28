@@ -184,7 +184,27 @@ namespace CalculatorWinForms
                     {
                         finalStr += "*";
                     }
-                    finalStr += Convert.ToString(num);
+
+                    /*if (i != 0 && (str[i - 1] == '+' || str[i - 1] == '-' || str[i - 1] == '*' || str[i - 1] == '÷' || str[i - 1] == '^'))
+                    {
+                        finalStr += '(';
+                        finalStr += Convert.ToString(num);
+                        finalStr += ')';
+                    }
+                    else
+                    {
+                        finalStr += Convert.ToString(num);
+                    }*/
+                    if (i != 0 && str[i - 1] != '(')
+                    {
+                        finalStr += '(';
+                        finalStr += Convert.ToString(num);
+                        finalStr += ')';
+                    }
+                    else
+                    {
+                        finalStr += Convert.ToString(num);
+                    }
                 }
                 else
                 {
@@ -284,17 +304,32 @@ namespace CalculatorWinForms
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        static string GetExpressionIn(ref string str)
+        static string GetExpressionIn(ref string str, bool tg)
         {
             string str2 = "";//Строка в которую мы помещаем следущий член выражения 
             int position = 0;//Сюда поместим позицию последнего символа члена выражения
-            for (int i = 0; str[i + 1] != ')'; i++)
+            int countParanthesis = 0;
+            for (int i = 0;; i++)
             {
+                if (str[i + 1] == ')' && countParanthesis == 0)
+                {
+                    break;
+                }
+
+                if (str[i] == '(')
+                {
+                    countParanthesis++;
+                }
+                else if (str[i] == ')')
+                {
+                    countParanthesis--;
+                }
+
                 str2 += str[i];
                 position = i;
             }
             string strBuffer = "";//Сида помещаем исходную строку без str2 и пробела между ними
-            for (int i = (position + 4); i < str.Length; i++)
+            for (int i = tg ? (position + 3) : (position + 4); i < str.Length; i++)
             {
                 strBuffer += str[i];
             }
@@ -394,39 +429,39 @@ namespace CalculatorWinForms
                     {
                         if (buffer[0] == 's')
                         {
-                            buffer = GetExpressionIn(ref str);
+                            buffer = GetExpressionIn(ref str, false);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            result = Math.Sin(result);
+                            result = Math.Sin(result/10);
                         }
                         else if (buffer[0] == 'c' && buffer[1] == 'o')
                         {
-                            buffer = GetExpressionIn(ref str);
+                            buffer = GetExpressionIn(ref str, false);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            result = Math.Cos(result);
+                            result = Math.Cos(result/10);
                         }
                         else if (buffer[0] == 't')
                         {
-                            buffer = GetExpressionIn(ref str);
+                            buffer = GetExpressionIn(ref str, true);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
                             if (result % (Math.PI / 2) == 0)
                             {
                                 return "Недопустимое выражение в tg";
                             }
-                            result = Math.Tan(result);
+                            result = Math.Tan(result/10);
                         }
                         else if (buffer[0] == 'c' && buffer[1] == 't')
                         {
-                            buffer = GetExpressionIn(ref str);
+                            buffer = GetExpressionIn(ref str, false);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
                             if (result % Math.PI == 0)
                             {
                                 return "Недопустимое выражение в ctg";
                             }
-                            result = 1.0 / Math.Tan(result);
+                            result = 1.0 / Math.Tan(result/10);
                         }
                         finalExpression += (Convert.ToString(result) + " ");
                     }
@@ -715,7 +750,7 @@ namespace CalculatorWinForms
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            if (arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '÷' || arr[position - 1] == '^')
+            if (position != 0 && (arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '÷' || arr[position - 1] == '^'))
             {
                 position--;
                 arr[position] = '+';
@@ -735,7 +770,7 @@ namespace CalculatorWinForms
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            if (arr[position - 1] == '+' || arr[position - 1] == '*' || arr[position - 1] == '÷' || arr[position - 1] == '^')
+            if (position != 0 && (arr[position - 1] == '+' || arr[position - 1] == '*' || arr[position - 1] == '÷' || arr[position - 1] == '^'))
             {
                 position--;
                 arr[position] = '-';
@@ -755,7 +790,7 @@ namespace CalculatorWinForms
 
         private void buttonMultiply_Click(object sender, EventArgs e)
         {
-            if (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '÷' || arr[position - 1] == '^')
+            if (position != 0 && (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '÷' || arr[position - 1] == '^'))
             {
                 position--;
                 arr[position] = '*';
@@ -775,7 +810,7 @@ namespace CalculatorWinForms
 
         private void buttonDivision_Click(object sender, EventArgs e)
         {
-            if (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '^')
+            if (position != 0 && (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '^'))
             {
                 position--;
                 arr[position] = '÷';
@@ -795,7 +830,7 @@ namespace CalculatorWinForms
 
         private void buttonPow_Click(object sender, EventArgs e)
         {
-            if (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '÷')
+            if (position != 0 && (arr[position - 1] == '+' || arr[position - 1] == '-' || arr[position - 1] == '*' || arr[position - 1] == '÷'))
             {
                 position--;
                 arr[position] = '^';
@@ -931,6 +966,16 @@ namespace CalculatorWinForms
 
         private void buttonEqualSign_Click(object sender, EventArgs e)
         {
+            double coefficient;
+            if (textBox1.Text == "")
+            {
+                coefficient = 1;
+            }
+            else
+            {
+                coefficient = Convert.ToDouble(textBox1.Text);
+            }
+            
             bool haveX = false;
             for (int i = 0; arr[i] != 0; i++)
             {
@@ -951,12 +996,40 @@ namespace CalculatorWinForms
                 return;
             }
 
+            int countParanthesis = 0;
+            for (int i = 0; arr[i] != 0; i++)
+            {
+                if (arr[i] == '(')
+                {
+                    countParanthesis++;
+                }
+                else if (arr[i] == ')')
+                {
+                    countParanthesis--;
+                }
+            }
+
+            if (countParanthesis > 0)
+            {
+                for (int i = 0; i < countParanthesis; i++)
+                {
+                    for (int j = 0;; j++)
+                    {
+                        if (arr[j] == 0)
+                        {
+                            arr[j] = ')';
+                            break;
+                        }
+                    }
+                }
+            }
+
             string str = "";
             for (int i = 0; arr[i] != 0; i++)
             {
                 str += arr[i];
             }
-            str = replaceX(str, 1);
+            str = replaceX(str, 1 - 448);
             str = NormExpression(str);
             if (str == "Ты ввёл некорректное выражение!")
             {
@@ -965,9 +1038,24 @@ namespace CalculatorWinForms
             }
 
             Graphics graphics = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Black, 3f);
+            Pen pen = new Pen(Color.Red, 1f);
 
             Point[] points = new Point[896];
+            for (int i = 0; i < points.Length; i++)//Рисуем горизонтальную черту симметрии
+            {
+                points[i] = new Point(i, 285);
+            }
+            graphics.DrawLines(pen, points);
+
+            points = new Point[552];
+            for (int i = 0; i < points.Length; i++)//Рисуем вертикальную черту симметрии
+            {
+                points[i] = new Point(448, i);
+            }
+            graphics.DrawLines(pen, points);
+
+            pen = new Pen(Color.Black, 3f);
+            points = new Point[896];
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -976,7 +1064,7 @@ namespace CalculatorWinForms
                 {
                     str += arr[j];
                 }
-                str = replaceX(str, i + 1);
+                str = replaceX(str, i - 448);
                 str = NormExpression(str);
                 str = ReverseInPolishNotation(str);
                 if (str == "Недопустимое выражение в tg")
@@ -989,9 +1077,16 @@ namespace CalculatorWinForms
                 }
                 double result = ReverseOutPolishNotation(str);
 
-                points[i] = new Point(i, (int)result);
-                graphics.DrawLines(pen, points);
+                points[i] = new Point(i, 285 - (int)(result*coefficient));
+                //points[i] = new Point(i, 315 - (int)(Math.Sin((double)i/10)*100));
             }
+            graphics.DrawLines(pen, points);
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+        }
+
     }
 }
