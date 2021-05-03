@@ -245,9 +245,11 @@ namespace CalculatorWinForms
             {
                 if (str[i] == 'x')
                 {
-                    if (i != 0 && str[i - 1] >= '0' && str[i - 1] <= '9')//Допустим у нас написанно 5x очевидно что это значит 5*x, но программа этого не знает, вот мы указываем это явно
-                    {
+                    bool isAddMultiply = false;
+                    if (i != 0 && ((str[i - 1] >= '0' && str[i - 1] <= '9') || str[i - 1] == 'e' || str[i -1] == 'i'))//Допустим у нас написанно 5x очевидно что это значит 5*x, 
+                    {                                                                                 //но программа этого не знает, вот мы указываем это явно
                         finalStr += "*";
+                        isAddMultiply = true;
                     }
 
                     if (i != 0 && num < 0 && str[i] == 'x' && str[i - 1] == '-' && (i == 1 || str[i - 2] == '('))//Если наше число отрицательно, а оператор перед этим число это '-' и при всём это этот минус либо перед скобкой 
@@ -270,6 +272,12 @@ namespace CalculatorWinForms
                         finalStrBuffer += '+';
                         finalStr = finalStrBuffer;
                         finalStr += Convert.ToString(-num);
+                    }
+                    else if (i != 0 && num < 0 && (str[i - 1] == '*' || str[i - 1] == '/' || str[i - 1] == '^' || isAddMultiply == true))
+                    {
+                        finalStr += "(";
+                        finalStr += Convert.ToString(num);
+                        finalStr += ")";
                     }
                     else
                     {
