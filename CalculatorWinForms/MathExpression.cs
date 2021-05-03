@@ -111,7 +111,11 @@ namespace CalculatorWinForms
             string str2 = "";//Формируем финальное выражение, так чтобы всё можно было бы удобно запихивать в стек(разделяя числа, опреаторы и скобки пробелом)
             for (int i = 0; i < str.Length; i++)//Если мы встречаем оператор, то ставим слева и справа от его пробел и добавляем в финальную выражение, и по одному пробела справ от открывающей и слева от закрывающей скобки
             {
-                if (i == 0 && str[i] == '-')//Если минус в начале строки, значит это не оператор, а отрицательное число
+                if (i == 0 && str[i] == '-' && str[i + 1] == '(')//Если минус в начале строки, значит это не оператор, а отрицательное число
+                {
+                    str2 += "-1 * ";
+                }
+                else if (i == 0 && str[i] == '-')
                 {
                     str2 += '-';
                 }
@@ -227,5 +231,125 @@ namespace CalculatorWinForms
 
             return str;
         }
+
+        /// <summary>
+        /// Заменяет х в выражении str на num (с учётом того что num может быть отрицательным числом)
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        static public string ReplaceX(string str, int num)
+        {
+            string finalStr = "";
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == 'x')
+                {
+                    if (i != 0 && str[i - 1] >= '0' && str[i - 1] <= '9')//Допустим у нас написанно 5x очевидно что это значит 5*x, но программа этого не знает, вот мы указываем это явно
+                    {
+                        finalStr += "*";
+                    }
+
+                    if (i != 0 && num < 0 && str[i] == 'x' && str[i - 1] == '-' && (i == 1 || str[i - 2] == '('))//Если наше число отрицательно, а оператор перед этим число это '-' и при всём это этот минус либо перед скобкой 
+                    {                                                                                      //либо в начале выражения, значит мы убираем этот минус и записываем абсолютное значение числа
+                        string finalStrBuffer = "";
+                        for (int j = 0; j < finalStr.Length - 1; j++)
+                        {
+                            finalStrBuffer += finalStr[j];
+                        }
+                        finalStr = finalStrBuffer;
+                        finalStr += Convert.ToString(-num);
+                    }
+                    else if (i != 0 && num < 0 && str[i - 1] == '-')//Если наше число отрицательное, а оператор перед этим числом это '-', значит вместо '-' ставим '+' и подставляем абсолютное значение числа
+                    {
+                        string finalStrBuffer = "";
+                        for (int j = 0; j < finalStr.Length - 1; j++)
+                        {
+                            finalStrBuffer += finalStr[j];
+                        }
+                        finalStrBuffer += '+';
+                        finalStr = finalStrBuffer;
+                        finalStr += Convert.ToString(-num);
+                    }
+                    else
+                    {
+                        finalStr += Convert.ToString(num);
+                    }
+                }
+                else
+                {
+                    finalStr += str[i];
+                }
+            }
+            return finalStr;
+        }
+
+
+        /// <summary>
+        /// Вычитает член выражения из начала строки и возвращает его
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        static public string GetMemberOfExpression(ref string str)//Члены выражения разделены пробелом
+        {
+            string str2 = "";//Строка в которую мы помещаем следущий член выражения 
+            int position = 0;//Сюда поместим позицию последнего символа члена выражения
+            for (int i = 0; str[i] != ' '; i++)
+            {
+                str2 += str[i];
+                position = i;
+                if (i + 1 == str.Length)//Проверка на конец строки чтобы не выйти за пределы массива
+                {
+                    break;
+                }
+            }
+            string strBuffer = "";//Сюда помещаем исходную строку без str2 и пробела между ними
+            for (int i = position + 2; i < str.Length; i++)
+            {
+                strBuffer += str[i];
+            }
+            str = strBuffer;
+            return str2;
+        }
+
+
+        /// <summary>
+        /// Возвращает выражение которое находится до закрывающей скобки. Удобно использывать для того чтобы найти выражение внутри sin, cos, tg, ctg
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        static public string GetExpressionIn(ref string str)
+        {
+            string str2 = "";//Строка в которую мы помещаем следущий член выражения 
+            int position = 0;//Сюда поместим позицию последнего символа члена выражения
+            int countParanthesis = 0;
+            for (int i = 0; ; i++)
+            {
+                if (str[i + 1] == ')' && countParanthesis == 0)
+                {
+                    break;
+                }
+
+                if (str[i] == '(')
+                {
+                    countParanthesis++;
+                }
+                else if (str[i] == ')')
+                {
+                    countParanthesis--;
+                }
+
+                str2 += str[i];
+                position = i;
+            }
+            string strBuffer = "";//Сида помещаем исходную строку без str2 и пробела между ними
+            for (int i = (position + 3); i < str.Length; i++)
+            {
+                strBuffer += str[i];
+            }
+            str = strBuffer;
+            return str2;
+        }
+
     }
 }
