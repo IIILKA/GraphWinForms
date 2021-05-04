@@ -488,7 +488,7 @@ namespace CalculatorWinForms
             {
                 str += arr[i];
             }
-            str = MathExpression.ReplaceX(str, 1 - 448);
+            str = MathExpression.ReplaceX(str, 1 - 450);
             str = MathExpression.NormExpression(str);
             if (str == "Ты ввёл некорректное выражение!")
             {
@@ -499,14 +499,14 @@ namespace CalculatorWinForms
             Graphics graphics = pictureBox1.CreateGraphics();
             Pen pen = new Pen(Color.Red, 1f);
 
-            Point[] points = new Point[896];
+            Point[] points = new Point[900];
             for (int i = 0; i < points.Length; i++)//Рисуем горизонтальную черту симметрии
             {
-                points[i] = new Point(i, 285);
+                points[i] = new Point(i, 275);
             }
             graphics.DrawLines(pen, points);
 
-            points = new Point[552];
+            points = new Point[550];
             for (int i = 0; i < points.Length; i++)//Рисуем вертикальную черту симметрии
             {
                 points[i] = new Point(448, i);
@@ -514,7 +514,7 @@ namespace CalculatorWinForms
             graphics.DrawLines(pen, points);
 
             pen = new Pen(Color.Black, 3f);
-            points = new Point[896];
+            points = new Point[900];
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -523,7 +523,7 @@ namespace CalculatorWinForms
                 {
                     str += arr[j];
                 }
-                str = MathExpression.ReplaceX(str, i - 448);
+                str = MathExpression.ReplaceX(str, i - 450);
                 str = MathExpression.NormExpression(str);
                 str = Calculator.ReverseInPolishNotation(str);
                 if (str == "Недопустимое выражение в tg")

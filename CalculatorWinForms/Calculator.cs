@@ -180,7 +180,7 @@ namespace CalculatorWinForms
                             buffer = MathExpression.GetExpressionIn(ref str);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            if ((int)(result % (3.1415926535897931 / 2)) == 0)
+                            if ((result * 100) % (3.14 * 100 / 2) <= 0.0000000001 && (result * 100) % (3.14 * 100 / 2) >= -0.0000000001)//Остаток от деления работает плохо с нецелыми числами так что мы здесь немного подшаманим
                             {
                                 return "Недопустимое выражение в tg";
                             }
@@ -191,7 +191,7 @@ namespace CalculatorWinForms
                             buffer = MathExpression.GetExpressionIn(ref str);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            if (result % Math.PI == 0)
+                            if ((result * 100) % (3.14 * 100) <= 0.0000000001 && (result * 100) % (3.14 * 100) >= -0.0000000001)
                             {
                                 return "Недопустимое выражение в ctg";
                             }
@@ -201,11 +201,11 @@ namespace CalculatorWinForms
                     }
                     else if (buffer[0] == 'p')
                     {
-                        finalExpression += (Convert.ToString(Math.PI) + " ");
+                        finalExpression += ("3.14 ");
                     }
                     else if (buffer == "e")
                     {
-                        finalExpression += (Convert.ToString(Math.E) + " ");
+                        finalExpression += ("2.72 ");
                     }
                     else
                     {
