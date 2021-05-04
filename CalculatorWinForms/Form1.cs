@@ -421,6 +421,7 @@ namespace CalculatorWinForms
 
         private void buttonEqualSign_Click(object sender, EventArgs e)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             double coefficient;
             if (textBox1.Text == "")
             {
@@ -451,37 +452,14 @@ namespace CalculatorWinForms
                 return;
             }
 
-            //int countParanthesis = 0;
             for (int i = 0; arr[i] != 0; i++)
             {
                 if (arr[i] == '÷')
                 {
                     arr[i] = '/';
                 }
-                /*if (arr[i] == '(')
-                {
-                    countParanthesis++;
-                }
-                else if (arr[i] == ')')
-                {
-                    countParanthesis--;
-                }*/
             }
 
-            /*if (countParanthesis > 0)
-            {
-                for (int i = 0; i < countParanthesis; i++)
-                {
-                    for (int j = 0;; j++)
-                    {
-                        if (arr[j] == 0)
-                        {
-                            arr[j] = ')';
-                            break;
-                        }
-                    }
-                }
-            }*/
 
             string str = "";
             for (int i = 0; arr[i] != 0; i++)
@@ -502,14 +480,14 @@ namespace CalculatorWinForms
             Point[] points = new Point[900];
             for (int i = 0; i < points.Length; i++)//Рисуем горизонтальную черту симметрии
             {
-                points[i] = new Point(i, 275);
+                points[i] = new Point(i, 285);
             }
             graphics.DrawLines(pen, points);
 
             points = new Point[550];
             for (int i = 0; i < points.Length; i++)//Рисуем вертикальную черту симметрии
             {
-                points[i] = new Point(448, i);
+                points[i] = new Point(450, i);
             }
             graphics.DrawLines(pen, points);
 
