@@ -68,8 +68,14 @@ namespace CalculatorWinForms
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
+            this.textBoxCoefficient = new System.Windows.Forms.TextBox();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.textBoxXmin = new System.Windows.Forms.TextBox();
+            this.textBoxXmax = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxDivisionPrice = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -511,25 +517,75 @@ namespace CalculatorWinForms
             this.label2.TabIndex = 30;
             this.label2.Text = "Введите коофицент растяжения в высоту";
             // 
-            // textBox1
+            // textBoxCoefficient
             // 
-            this.textBox1.Location = new System.Drawing.Point(688, 597);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 23);
-            this.textBox1.TabIndex = 31;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCoefficient.Location = new System.Drawing.Point(688, 597);
+            this.textBoxCoefficient.Name = "textBoxCoefficient";
+            this.textBoxCoefficient.Size = new System.Drawing.Size(126, 23);
+            this.textBoxCoefficient.TabIndex = 31;
+            this.textBoxCoefficient.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button10
+            // buttonClear
             // 
-            this.button10.BackColor = System.Drawing.Color.Red;
-            this.button10.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button10.Location = new System.Drawing.Point(1013, 587);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(151, 37);
-            this.button10.TabIndex = 32;
-            this.button10.Text = "Очистить";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.buttonClear.BackColor = System.Drawing.Color.Red;
+            this.buttonClear.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonClear.Location = new System.Drawing.Point(1013, 587);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(151, 37);
+            this.buttonClear.TabIndex = 32;
+            this.buttonClear.Text = "Очистить";
+            this.buttonClear.UseVisualStyleBackColor = false;
+            this.buttonClear.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // textBoxXmin
+            // 
+            this.textBoxXmin.Location = new System.Drawing.Point(1251, 578);
+            this.textBoxXmin.Name = "textBoxXmin";
+            this.textBoxXmin.Size = new System.Drawing.Size(59, 23);
+            this.textBoxXmin.TabIndex = 33;
+            // 
+            // textBoxXmax
+            // 
+            this.textBoxXmax.Location = new System.Drawing.Point(1351, 578);
+            this.textBoxXmax.Name = "textBoxXmax";
+            this.textBoxXmax.Size = new System.Drawing.Size(61, 23);
+            this.textBoxXmax.TabIndex = 35;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(1204, 578);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 21);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "X от";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(1316, 578);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 21);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "до";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(895, 568);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 15);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Цена деления";
+            // 
+            // textBoxDivisionPrice
+            // 
+            this.textBoxDivisionPrice.Location = new System.Drawing.Point(880, 597);
+            this.textBoxDivisionPrice.Name = "textBoxDivisionPrice";
+            this.textBoxDivisionPrice.Size = new System.Drawing.Size(113, 23);
+            this.textBoxDivisionPrice.TabIndex = 41;
             // 
             // Form1
             // 
@@ -537,8 +593,14 @@ namespace CalculatorWinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1552, 654);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDivisionPrice);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxXmax);
+            this.Controls.Add(this.textBoxXmin);
+            this.Controls.Add(this.buttonClear);
+            this.Controls.Add(this.textBoxCoefficient);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -622,8 +684,14 @@ namespace CalculatorWinForms
         private System.Windows.Forms.Button o;
         private System.Windows.Forms.Button n;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox textBoxCoefficient;
+        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.TextBox textBoxXmin;
+        private System.Windows.Forms.TextBox textBoxXmax;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxDivisionPrice;
     }
 }
 

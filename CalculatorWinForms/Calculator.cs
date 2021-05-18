@@ -166,14 +166,14 @@ namespace CalculatorWinForms
                             buffer = MathExpression.GetExpressionIn(ref str);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            result = Math.Sin(result / 10);
+                            result = Math.Sin(result);
                         }
                         else if (buffer[0] == 'c' && buffer[1] == 'o')
                         {
                             buffer = MathExpression.GetExpressionIn(ref str);
                             string strForSinCosTgCtgInPolishNotation = ReverseInPolishNotation(buffer);//Записываем сьда выражение внутри sin, cos, tg или ctg с помощью обратной польской записи
                             result = ReverseOutPolishNotation(strForSinCosTgCtgInPolishNotation);//Получаем ответ из выражение внутри sin, cos, th или ctg которое уже записанно обратной польской записью
-                            result = Math.Cos(result / 10);
+                            result = Math.Cos(result);
                         }
                         else if (buffer[0] == 't')
                         {
@@ -184,7 +184,7 @@ namespace CalculatorWinForms
                             {
                                 return "Недопустимое выражение в tg";
                             }
-                            result = Math.Tan(result / 10);
+                            result = Math.Tan(result);
                         }
                         else if (buffer[0] == 'c' && buffer[1] == 't')
                         {
@@ -195,7 +195,7 @@ namespace CalculatorWinForms
                             {
                                 return "Недопустимое выражение в ctg";
                             }
-                            result = 1.0 / Math.Tan(result / 10);
+                            result = 1.0 / Math.Tan(result);
                         }
                         finalExpression += (Convert.ToString(result) + " ");
                     }

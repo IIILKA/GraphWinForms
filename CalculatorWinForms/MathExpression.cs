@@ -292,6 +292,59 @@ namespace CalculatorWinForms
             return finalStr;
         }
 
+        static public string ReplaceX(string str, double num)
+        {
+            string finalStr = "";
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == 'x')
+                {
+                    bool isAddMultiply = false;
+                    if (i != 0 && ((str[i - 1] >= '0' && str[i - 1] <= '9') || str[i - 1] == 'e' || str[i - 1] == 'i'))//Допустим у нас написанно 5x очевидно что это значит 5*x, 
+                    {                                                                                 //но программа этого не знает, вот мы указываем это явно
+                        finalStr += "*";
+                        isAddMultiply = true;
+                    }
+
+                    if (i != 0 && num < 0 && str[i] == 'x' && str[i - 1] == '-' && (i == 1 || str[i - 2] == '('))//Если наше число отрицательно, а оператор перед этим число это '-' и при всём это этот минус либо перед скобкой 
+                    {                                                                                      //либо в начале выражения, значит мы убираем этот минус и записываем абсолютное значение числа
+                        string finalStrBuffer = "";
+                        for (int j = 0; j < finalStr.Length - 1; j++)
+                        {
+                            finalStrBuffer += finalStr[j];
+                        }
+                        finalStr = finalStrBuffer;
+                        finalStr += Convert.ToString(-num);
+                    }
+                    else if (i != 0 && num < 0 && str[i - 1] == '-')//Если наше число отрицательное, а оператор перед этим числом это '-', значит вместо '-' ставим '+' и подставляем абсолютное значение числа
+                    {
+                        string finalStrBuffer = "";
+                        for (int j = 0; j < finalStr.Length - 1; j++)
+                        {
+                            finalStrBuffer += finalStr[j];
+                        }
+                        finalStrBuffer += '+';
+                        finalStr = finalStrBuffer;
+                        finalStr += Convert.ToString(-num);
+                    }
+                    else if (i != 0 && num < 0 && (str[i - 1] == '*' || str[i - 1] == '/' || str[i - 1] == '^' || isAddMultiply == true))
+                    {
+                        finalStr += "(";
+                        finalStr += Convert.ToString(num);
+                        finalStr += ")";
+                    }
+                    else
+                    {
+                        finalStr += Convert.ToString(num);
+                    }
+                }
+                else
+                {
+                    finalStr += str[i];
+                }
+            }
+            return finalStr;
+        }
 
         /// <summary>
         /// Вычитает член выражения из начала строки и возвращает его
