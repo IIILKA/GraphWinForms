@@ -421,119 +421,142 @@ namespace CalculatorWinForms
 
         private void buttonEqualSign_Click(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            double coefficient;//Коофицент растяжения
-            if (textBoxCoefficient.Text == "")
+            try
             {
-                coefficient = 1;
-            }
-            else
-            {
-                coefficient = Convert.ToDouble(textBoxCoefficient.Text);
-            }
-
-            double Xmin, Xmax;//Область определеня
-            if (textBoxXmin.Text == "")
-            {
-                Xmin = 0;
-            }
-            else
-            {
-                Xmin = Convert.ToDouble(textBoxXmin.Text);
-            }
-
-            if (textBoxXmax.Text == "")
-            {
-                Xmax = 900;
-            }
-            else
-            {
-                Xmax = Convert.ToDouble(textBoxXmax.Text);
-            }
-            double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Ширина pictureBox = 900, расчитываем шаг по значения (1 пиксель = coefficientX)
-
-            //Проверяем есть ли Х в выражении
-            bool haveX = false;
-            for (int i = 0; arr[i] != 0; i++)
-            {
-                if (arr[i] == 'x')
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+                double coefficient;//Коофицент растяжения
+                if (textBoxCoefficient.Text == "")
                 {
-                    haveX = true;
-                    break;
+                    coefficient = 1;
                 }
-            }
-            if (haveX == false)
-            {
+                else
+
+                {
+                    coefficient = Convert.ToDouble(textBoxCoefficient.Text);
+                }
+
+                double Xmin, Xmax;//Область определеня
+                if (textBoxXmin.Text == "")
+                {
+                    Xmin = 0;
+                }
+                else
+                {
+                    Xmin = Convert.ToDouble(textBoxXmin.Text);
+                }
+
+                if (textBoxXmax.Text == "")
+                {
+                    Xmax = 900;
+                }
+                else
+                {
+                    Xmax = Convert.ToDouble(textBoxXmax.Text);
+                }
+                double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Ширина pictureBox = 900, расчитываем шаг по значения (1 пиксель = coefficientX)
+
+                if (Xmax <= Xmin)
+                {
+                    return;
+                }
+
+                //Проверяем есть ли Х в выражении
+                bool haveX = false;
                 for (int i = 0; arr[i] != 0; i++)
                 {
-                    arr[i] = (char)0;
+                    if (arr[i] == 'x')
+                    {
+                        haveX = true;
+                        break;
+                    }
                 }
-                position = 0;
-                label1.Text = "Ошибка! Отсутствует x";
-                return;
-            }
-
-            //Заменяем ÷ на /
-            for (int i = 0; arr[i] != 0; i++)
-            {
-                if (arr[i] == '÷')
+                if (haveX == false)
                 {
-                    arr[i] = '/';
+                    for (int i = 0; arr[i] != 0; i++)
+                    {
+                        arr[i] = (char)0;
+                    }
+                    position = 0;
+                    label1.Text = "Ошибка! Отсутствует x";
+                    return;
                 }
-            }
 
-
-            //Проверяем выражение на корректность
-            string str = "";
-            for (int i = 0; arr[i] != 0; i++)
-            {
-                str += arr[i];
-            }
-            str = MathExpression.ReplaceX(str, 1 - 450);
-            str = MathExpression.NormExpression(str);
-            if (str == "Ты ввёл некорректное выражение!")
-            {
-                label1.Text = "Некорректное выражение!";
-                return;
-            }
-
-
-            DrawHorizontLine(pictureBox1);
-
-            Graphics graphics = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Black, 3f);
-            Point[] points = new Point[900];
-
-            //Формируем массив точек и рисуем граффик по ним
-            double x = Xmin;//Начинаем осчёт с крайнего левого значения
-            for (int i = 0; i < points.Length; i++)
-            {
-                //Копируем символы из массива в строку
-                str = "";
-                for (int j = 0; arr[j] != 0; j++)
+                //Заменяем ÷ на /
+                for (int i = 0; arr[i] != 0; i++)
                 {
-                    str += arr[j];
+                    if (arr[i] == '÷')
+                    {
+                        arr[i] = '/';
+                    }
                 }
-                
 
-                str = MathExpression.ReplaceX(str, x);
+
+                //Проверяем выражение на корректность
+                string str = "";
+                for (int i = 0; arr[i] != 0; i++)
+                {
+                    str += arr[i];
+                }
+                str = MathExpression.ReplaceX(str, 1 - 450);
                 str = MathExpression.NormExpression(str);
-                str = Calculator.ReverseInPolishNotation(str);
-                if (str == "Недопустимое выражение в tg")
+                if (str == "Ты ввёл некорректное выражение!")
                 {
-                    continue;
+                    label1.Text = "Некорректное выражение!";
+                    return;
                 }
-                else if (str == "Недопустимое выражение в ctg")
-                {
-                    continue;
-                }
-                double result = Calculator.ReverseOutPolishNotation(str);
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                points[i] = new Point(i, 275 - (int)(result*coefficient));//275 - это центральная ось(y = 0), coefficient указывает на то как сильно бы толжны растянуть  
-                x += coefficientX;//Делаем шаг                                                                                                               //граффик вдоль оси Oy
+                Graphics graphics = pictureBox1.CreateGraphics();
+                Pen pen = new Pen(Color.Black, 3f);
+                Point[] points = new Point[900];
+
+                //Формируем массив точек и рисуем граффик по ним
+                double x = Xmin;//Начинаем осчёт с крайнего левого значения
+                for (int i = 0; i < points.Length; i++)
+                {
+                    //Копируем символы из массива в строку
+                    str = "";
+                    for (int j = 0; arr[j] != 0; j++)
+                    {
+                        str += arr[j];
+                    }
+
+
+                    str = MathExpression.ReplaceX(str, x);
+                    str = MathExpression.NormExpression(str);
+                    str = Calculator.ReverseInPolishNotation(str);
+                    if (str == "Недопустимое выражение в tg")
+                    {
+                        continue;
+                    }
+                    else if (str == "Недопустимое выражение в ctg")
+                    {
+                        continue;
+                    }
+                    double result = Calculator.ReverseOutPolishNotation(str);
+
+                    points[i] = new Point(i, 275 - (int)(result * coefficient));//275 - это центральная ось(y = 0), coefficient указывает на то как сильно бы толжны растянуть  
+                    x += coefficientX;//Делаем шаг                                                                                                               //граффик вдоль оси Oy
+                }
+
+                try
+                {
+                    DrawDivisionPriceX(textBoxDivisionPriceX.Text.Length == 0 ? 1 : Convert.ToDouble(textBoxDivisionPriceX.Text),
+                        textBoxDivisionPriceY.Text.Length == 0 ? Math.Round((275 / coefficient / 5), 2) : Convert.ToDouble(textBoxDivisionPriceY.Text),
+                        coefficient, Xmin, Xmax, pictureBox1);//Оисем рисочки цены деления и ось Oy если она есть на области определения
+
+                    DrawHorizontLine(pictureBox1);
+                    graphics.DrawLines(pen, points);//Рисуем граффик
+                }
+                catch
+                {
+
+                }
             }
-            graphics.DrawLines(pen, points);//Рисуем граффик
-            DrawDivisionPriceX(Convert.ToDouble(textBoxDivisionPrice.Text), Xmin, Xmax, pictureBox1);//Оисем рисочки цены деления и ось Oy если она есть на области определения
+            catch
+            {
+
+            }
         }
 
         static void DrawHorizontLine(PictureBox pictureBox)
@@ -562,7 +585,7 @@ namespace CalculatorWinForms
             graphics.DrawLines(pen, points);
         }
 
-        static void DrawDivisionPriceX(double divisionPrice, double Xmin, double Xmax, PictureBox pictureBox)
+        static void DrawDivisionPriceX(double divisionPriceX, double divsionPriceY, double coefficient, double Xmin, double Xmax, PictureBox pictureBox)
         {
             Graphics graphics = pictureBox.CreateGraphics();
             Pen pen = new Pen(Color.Red, 3f);
@@ -573,7 +596,7 @@ namespace CalculatorWinForms
 
             if (Xmin <= 0 && Xmax >= 0)//Ось Oy есть
             {
-                int nToMax = (int)(Xmax / divisionPrice);//Количество рисочек от нуля до крайнего правого значаения
+                int nToMax = (int)(Xmax / divisionPriceX);//Количество рисочек от нуля до крайнего правого значаения
                 Point[] points = new Point[11];
                 double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Шаг 
                 double x = Xmin;//Начинаем с крайнего левого значениия, потому что мы не знаем на каком пикселе находится ноль
@@ -583,15 +606,18 @@ namespace CalculatorWinForms
                 {
                     if (((x - coefficientX) < 0 && (x + coefficientX) > 0) || x == 0)
                     {
-                        DrawVerticalLine(i, pictureBox);
+                        //DrawVerticalLine(i, pictureBox);
                         iOfZero = i;
                         break;
                     }
                     x += coefficientX;
                 }
+
+                DrawDivisionPriceY(divsionPriceY, coefficient, Xmin, Xmax, pictureBox);
+
                 for (int i = iOfZero; i < 900; i++)//Рисуем рисочки справа от оси Oy
                 {
-                    if (((x - coefficientX) < (0 + n * divisionPrice) && (x + coefficientX) > (0 + n * divisionPrice)) || (x == (0 + n * divisionPrice)))
+                    if (((x - coefficientX) < (0 + n * divisionPriceX) && (x + coefficientX) > (0 + n * divisionPriceX)) || (x == (0 + n * divisionPriceX)))
                     {
                         if (n == nToMax + 1)
                         {
@@ -602,7 +628,7 @@ namespace CalculatorWinForms
                             points[j] = new Point(i, h);
                         }
                         graphics.DrawLines(pen, points);
-                        graphics.DrawString(Convert.ToString(0 + n * divisionPrice), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
+                        graphics.DrawString(Convert.ToString(Math.Round((0 + n * divisionPriceX), 2)), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
                         n++;
                     }
                     x += coefficientX;
@@ -610,13 +636,13 @@ namespace CalculatorWinForms
                 //graphics.DrawLines(pen, points);
 
 
-                int nToMin = (int)(-Xmin / divisionPrice);//Количество рисочек от нуля до крайнего левого значаения
+                int nToMin = (int)(-Xmin / divisionPriceX);//Количество рисочек от нуля до крайнего левого значаения
                 points = new Point[11];
                 x = 0;
                 n = 1;
                 for (int i = iOfZero; i > -1; i--)//Рисуем рисочки слева от оси Oy
                 {
-                    if (((x - coefficientX) < (0 - n * divisionPrice) && (x + coefficientX) > (0 - n * divisionPrice)) || (x == (0 - n * divisionPrice)))
+                    if (((x - coefficientX) < (0 - n * divisionPriceX) && (x + coefficientX) > (0 - n * divisionPriceX)) || (x == (0 - n * divisionPriceX)))
                     {
                         if (n == nToMin + 1)
                         {
@@ -627,7 +653,7 @@ namespace CalculatorWinForms
                             points[j] = new Point(i, h);
                         }
                         graphics.DrawLines(pen, points);
-                        graphics.DrawString(Convert.ToString(0 - n * divisionPrice), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
+                        graphics.DrawString(Convert.ToString(Math.Round((0 - n * divisionPriceX), 2)), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
                         n++;
                     }
                     x -= coefficientX;
@@ -636,7 +662,7 @@ namespace CalculatorWinForms
             }
             else if (Xmin < 0 && Xmax < 0)//Область определения слева от оси Oy
             {
-                int N = (int)(Math.Abs(Xmax - Xmin) / divisionPrice) + Math.Abs((int)(Xmax / divisionPrice));//Количество рисочек на области определения + от нуля до неё
+                int N = (int)(Math.Abs(Xmax - Xmin) / divisionPriceX) + Math.Abs((int)(Xmax / divisionPriceX));//Количество рисочек на области определения + от нуля до неё
                 Point[] points = new Point[11];
                 double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Шаг 
 
@@ -644,9 +670,9 @@ namespace CalculatorWinForms
                 int n = N;
                 for (int i = 0; i < 900; i++)//Рисуем рисочки справа от оси Oy
                 {
-                    if (((x - coefficientX) < (0 - n * divisionPrice) && (x + coefficientX) > (0 - n * divisionPrice)) || (x == (0 - n * divisionPrice)))
+                    if (((x - coefficientX) < (0 - n * divisionPriceX) && (x + coefficientX) > (0 - n * divisionPriceX)) || (x == (0 - n * divisionPriceX)))
                     {
-                        if (n == Math.Abs((int)(Xmax / divisionPrice)))
+                        if (n == Math.Abs((int)(Xmax / divisionPriceX)))
                         {
                             break;
                         }
@@ -655,7 +681,7 @@ namespace CalculatorWinForms
                             points[j] = new Point(i, h);
                         }
                         graphics.DrawLines(pen, points);
-                        graphics.DrawString(Convert.ToString(0 - n * divisionPrice), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
+                        graphics.DrawString(Convert.ToString(Math.Round((0 - n * divisionPriceX), 2)), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
                         n--;
                     }
                     x += coefficientX;
@@ -663,15 +689,15 @@ namespace CalculatorWinForms
             }
             else if (Xmin > 0 && Xmax > 0)//Область определени справа от оси Oy
             {
-                int N = (int)(Math.Abs(Xmax - Xmin) / divisionPrice) + Math.Abs((int)(Xmin / divisionPrice));//Количество рисочек на области определения + от нуля до неё
+                int N = (int)(Math.Abs(Xmax - Xmin) / divisionPriceX) + Math.Abs((int)(Xmin / divisionPriceX));//Количество рисочек на области определения + от нуля до неё
                 Point[] points = new Point[11];
                 double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Шаг 
 
                 double x = Xmin;
-                int n = Math.Abs((int)(Xmin / divisionPrice)) + 1;
+                int n = Math.Abs((int)(Xmin / divisionPriceX)) + 1;
                 for (int i = 0; i < 900; i++)//Рисуем рисочки справа от оси Oy
                 {
-                    if (((x - coefficientX) < (0 + n * divisionPrice) && (x + coefficientX) > (0 + n * divisionPrice)) || (x == (0 + n * divisionPrice)))
+                    if (((x - coefficientX) < (0 + n * divisionPriceX) && (x + coefficientX) > (0 + n * divisionPriceX)) || (x == (0 + n * divisionPriceX)))
                     {
                         if (n == N + 1)
                         {
@@ -682,10 +708,82 @@ namespace CalculatorWinForms
                             points[j] = new Point(i, h);
                         }
                         graphics.DrawLines(pen, points);
-                        graphics.DrawString(Convert.ToString(0 + n * divisionPrice), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
+                        graphics.DrawString(Convert.ToString(Math.Round((0 + n * divisionPriceX), 2)), font, drawBrush, points[10].X - 20, points[10].Y + 10);//Число под рисочкой
                         n++;
                     }
                     x += coefficientX;
+                }
+            }
+        }
+
+        static void DrawDivisionPriceY(double divisionPrice, double coefficient, double Xmin, double Xmax, PictureBox pictureBox)
+        {
+            Graphics graphics = pictureBox.CreateGraphics();
+            Pen pen = new Pen(Color.Red, 3f);
+            float single = 10f;
+            Font font = new Font("Unispace", single);
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+            if (Xmin <= 0 && Xmax >= 0)//Ось Oy есть
+            {
+                Point[] points = new Point[11];
+                double coefficientX = Math.Abs(Xmax - Xmin) / 900.0;//Шаг 
+                double x = Xmin;//Начинаем с крайнего левого значениия, потому что мы не знаем на каком пикселе находится ноль
+                int iOfZeroX = 0;//Индекс пикселя на которой находится х = 0
+                for (int i = 0; i < 900; i++)//Ищем индекс пикселя где x = 0 и рисуем там ось Oy
+                {
+                    if (((x - coefficientX) < 0 && (x + coefficientX) > 0) || x == 0)
+                    {
+                        DrawVerticalLine(i, pictureBox);
+                        iOfZeroX = i;
+                        break;
+                    }
+                    x += coefficientX;
+                }
+
+                int nToMax = (int)((275 / coefficient) / divisionPrice);//Количество рисочек от нуля до крайнего правого значаения
+                double coefficientY = (275.0 / coefficient) / 275.0;//Шаг
+                double y = 0;
+                int n = 1;
+
+                for (int i = 275; i > 0; i--)//Рисуем рисочки выше нуля
+                {
+                    if (((y - coefficientY) < (0 + n * divisionPrice) && (y + coefficientY) > (0 + n * divisionPrice)) || y == (0 + n * divisionPrice))
+                    {
+                        if (n == nToMax + 1)
+                        {
+                            break;
+                        }
+                        for (int j = 0, xOf = iOfZeroX - 6; j < 11; j++, xOf++)
+                        {
+                            points[j] = new Point(xOf, i);
+                        }
+                        graphics.DrawLines(pen, points);
+                        graphics.DrawString(Convert.ToString(Math.Round((0 + n * divisionPrice), 2)), font, drawBrush, points[10].X + 20, points[10].Y);//Число справа от рисочкой
+                        n++;
+                    }
+                    y += coefficientY;
+                }
+
+                y = 0;
+                n = 1;
+                for (int i = 275; i < 550; i++)//Рисуем рисочки ниже нуля
+                {
+                    if (((y - coefficientY) < (0 - n * divisionPrice) && (y + coefficientY) > (0 - n * divisionPrice)) || y == (0 - n * divisionPrice))
+                    {
+                        if (n == nToMax + 1)
+                        {
+                            break;
+                        }
+                        for (int j = 0, xOf = iOfZeroX - 6; j < 11; j++, xOf++)
+                        {
+                            points[j] = new Point(xOf, i);
+                        }
+                        graphics.DrawLines(pen, points);
+                        graphics.DrawString(Convert.ToString(Math.Round((0 - n * divisionPrice), 2)), font, drawBrush, points[10].X + 20, points[10].Y);//Число справа от рисочкой
+                        n++;
+                    }
+                    y -= coefficientY;
                 }
             }
         }

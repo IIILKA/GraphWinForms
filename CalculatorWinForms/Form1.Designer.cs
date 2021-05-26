@@ -75,7 +75,10 @@ namespace CalculatorWinForms
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxDivisionPrice = new System.Windows.Forms.TextBox();
+            this.textBoxDivisionPriceX = new System.Windows.Forms.TextBox();
+            this.textBoxDivisionPriceY = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -519,7 +522,7 @@ namespace CalculatorWinForms
             // 
             // textBoxCoefficient
             // 
-            this.textBoxCoefficient.Location = new System.Drawing.Point(688, 597);
+            this.textBoxCoefficient.Location = new System.Drawing.Point(685, 605);
             this.textBoxCoefficient.Name = "textBoxCoefficient";
             this.textBoxCoefficient.Size = new System.Drawing.Size(126, 23);
             this.textBoxCoefficient.TabIndex = 31;
@@ -580,12 +583,37 @@ namespace CalculatorWinForms
             this.label4.TabIndex = 40;
             this.label4.Text = "Цена деления";
             // 
-            // textBoxDivisionPrice
+            // textBoxDivisionPriceX
             // 
-            this.textBoxDivisionPrice.Location = new System.Drawing.Point(880, 597);
-            this.textBoxDivisionPrice.Name = "textBoxDivisionPrice";
-            this.textBoxDivisionPrice.Size = new System.Drawing.Size(113, 23);
-            this.textBoxDivisionPrice.TabIndex = 41;
+            this.textBoxDivisionPriceX.Location = new System.Drawing.Point(883, 605);
+            this.textBoxDivisionPriceX.Name = "textBoxDivisionPriceX";
+            this.textBoxDivisionPriceX.Size = new System.Drawing.Size(50, 23);
+            this.textBoxDivisionPriceX.TabIndex = 41;
+            // 
+            // textBoxDivisionPriceY
+            // 
+            this.textBoxDivisionPriceY.Location = new System.Drawing.Point(939, 605);
+            this.textBoxDivisionPriceY.Name = "textBoxDivisionPriceY";
+            this.textBoxDivisionPriceY.Size = new System.Drawing.Size(50, 23);
+            this.textBoxDivisionPriceY.TabIndex = 42;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(900, 587);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 15);
+            this.label6.TabIndex = 43;
+            this.label6.Text = "X";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(955, 586);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(14, 15);
+            this.label7.TabIndex = 44;
+            this.label7.Text = "Y";
             // 
             // Form1
             // 
@@ -593,7 +621,10 @@ namespace CalculatorWinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1552, 654);
-            this.Controls.Add(this.textBoxDivisionPrice);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBoxDivisionPriceY);
+            this.Controls.Add(this.textBoxDivisionPriceX);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -691,7 +722,10 @@ namespace CalculatorWinForms
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxDivisionPrice;
+        private System.Windows.Forms.TextBox textBoxDivisionPriceX;
+        private System.Windows.Forms.TextBox textBoxDivisionPriceY;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 
