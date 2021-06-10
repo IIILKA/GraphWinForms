@@ -1,0 +1,11 @@
+CalculatorWinForms.sln
+
+CalculatorWinForms/bin/
+
+CalculatorWinForms/obj/
+
+CalculatorWinForms/Properties/
+
+.git/
+
+.vs/
