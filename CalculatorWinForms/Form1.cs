@@ -313,6 +313,43 @@ namespace CalculatorWinForms
             {
                 position = 0;
             }
+
+            /*if (position > 0)
+            {
+                if (arr[position - 1] == 'n' || arr[position - 1] == 's' || (arr[position - 1] == 'g' && arr[position - 3] == 'c'))
+                {
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                }
+                else if (arr[position - 1] == 'g')
+                {
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                }
+                else if (arr[position - 1] == 'p')
+                {
+                    position--;
+                    arr[position] = (char)0;
+                    position--;
+                }
+                else
+                {
+                    position--;
+                }
+            }
+            else
+            {
+                position = 0;
+            }*/
+
             arr[position] = (char)0;
             string str = "y=";
             for (int i = 0; arr[i] != 0; i++)
